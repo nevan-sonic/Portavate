@@ -1,0 +1,19 @@
+{
+  "name": "@portavate/verification",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "@portavate/shared": "workspace:*",
+    "@portavate/crypto": "workspace:*",
+    "@portavate/memory-core": "workspace:*",
+    "@portavate/zero-g": "workspace:*",
+    "@portavate/arkiv": "workspace:*",
+    "@portavate/hedera-x402": "workspace:*",
+    "@portavate/receiving-agent": "workspace:*",
+    "zod": "^4.0.0"
+  }
+}

@@ -4,7 +4,7 @@
 
 Portavate is a design for transferring task-relevant memory between AI assistants and checking whether the receiving agent can use it. The planned **Continuity Passport** is a signed report that binds the outcome of specific checks to a memory version, a recipient, and a settled verification payment.
 
-> **Project status · Design only.** This repository contains the product and technical specification. The application, adapters, sponsor integrations, benchmark harness, and deployment are pending.
+> **Project status · Step 1 foundation.** The local web workspace, status API, standalone verifier shell, shared contracts, and passport eligibility guard are available. Memory workflows, live integrations, passport issuance, benchmark execution, and public deployment are pending.
 
 [Workflow](#verified-handoff) · [Architecture](#architecture) · [Getting started](#getting-started) · [ETHGlobal Mumbai](#ethglobal-mumbai-2026)
 
@@ -140,28 +140,40 @@ Freeze scored checks and pass thresholds before running the comparison. Keep a h
 
 ## Getting started
 
-The current repository is documentation-only. Git is the sole prerequisite for checking out this specification.
+Use Node.js 24 or 26 LTS and pnpm 11.25.0. Step 1 runs locally without credentials, PostgreSQL, or object storage.
 
 ~~~sh
 git clone https://github.com/nevan-sonic/Portavate.git
 cd Portavate
+pnpm install --frozen-lockfile
+pnpm dev
 ~~~
 
-There are currently no application install, build, test or run commands, and no environment variable contract. The proposed layout is `apps/web`, `apps/api`, `packages/` for shared schemas, verification and sponsor adapters, `tests/`, and `arkiv/` for submission documentation.
+| Service | Local URL | Purpose |
+| --- | --- | --- |
+| Web | http://localhost:3000 | Dashboard with live API readiness and five workspace routes |
+| API | http://127.0.0.1:4000 | GET /health and GET /api/status |
+| Verifier | http://127.0.0.1:4001 | GET /health and a POST /api/verify placeholder returning HTTP 501 |
 
-Before implementation, select a Node.js LTS release and package manager, define import fixtures and a target-model adapter, and provision the following configuration. Publish exact variable names and safe placeholders in `.env.example` when the scaffold exists.
+The dashboard fetches status on the server. Copy [the example configuration](.env.example) to a root .env file if you need to override defaults. API_URL is server-side. WEB_ORIGIN can explicitly allow a browser origin on the API. Production cross-origin access defaults to disabled. Leave future integration settings blank for Step 1.
 
-| Planned configuration | Required inputs |
-| --- | --- |
-| Application and artifact storage | PostgreSQL, private object storage, managed encryption and signing keys, auth and service credentials |
-| 0G | API credentials and credits, model selection, private routing and request evidence configuration |
-| Arkiv | Current testnet RPC, funded publishing wallet, access key if required, entity schema and query |
-| Hedera | Supported testnet facilitator, funded buyer, merchant account, payment asset and spending policy |
-| Receiving agent | Adapter credentials and approved model/provider data-handling policy |
+~~~sh
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm build
+~~~
 
-**Planned testing.** Cover schema and signature validation, access and expiry, version changes, settlement retries and replay, and fail-closed behavior. Add a reproducible smoke test using actual sponsor endpoints and one receiving agent.
+The build compiles the Next.js app and type-checks the workspace. The two services use Node.js LTS native TypeScript execution and can each run independently from the workspace.
 
-**Planned deployment.** Deploy the Next.js frontend to Vercel and the API and verifier to Node.js hosts, with managed PostgreSQL, encrypted object storage and a secret manager. Configure sponsor networks and verify a real handoff before publishing the demo. A future MCP service can run separately. Deployment and sponsor setup commands depend on the implementation.
+~~~sh
+pnpm --filter @portavate/api start
+pnpm --filter @portavate/verifier start
+pnpm --filter @portavate/web start
+~~~
+
+Run those commands in separate terminals after building. See [build progress](docs/build-progress.md) for the implemented boundaries, verification results, and next milestone. The planned hosted deployment uses the Next.js frontend, separate Node.js services, managed PostgreSQL, and encrypted object storage.
+
 
 ## ETHGlobal Mumbai 2026
 
@@ -181,7 +193,7 @@ Combined first-place opportunity is $8,500, subject to qualification and judging
 
 | Submission evidence | Status |
 | --- | --- |
-| Live app, demo video, runnable setup and build/test commands | Pending implementation |
+| Public live app and demo video | Pending implementation and deployment |
 | Hedera settled transaction ID and HashScan reference | Pending paid verification run |
 | Arkiv publisher wallets, entity IDs, runnable query and criterion files | Pending registry integration |
 | 0G inference request IDs and route evidence | Pending actual inference |
@@ -208,4 +220,4 @@ P0 covers a defined set of imports and one receiving adapter. Coverage depends o
 
 Use GitHub issues to discuss schema decisions, trust boundaries, adapter scope or benchmark fixtures. Keep changes focused and use descriptive commits. Capture reproduction steps and evidence for integrations. Attribute any reused code and follow its license.
 
-OpenAI Codex assisted with the initial `README.md` draft, source verification and editing from the maintainer's product brief. The specification cites research and sponsor documentation as references.
+OpenAI Codex assisted with the initial `README.md` draft, source verification and editing from the maintainer's product brief. Codex also assisted with the sponsor and architecture documents and the Step 1 monorepo, application shell, contracts and tests. The specification cites research and sponsor documentation as references.

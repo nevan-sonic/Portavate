@@ -1,0 +1,15 @@
+{
+  "name": "@portavate/verifier",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./app.ts",
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=../../.env server.ts",
+    "start": "node --env-file-if-exists=../../.env server.ts"
+  },
+  "dependencies": {
+    "fastify": "^5.7.0",
+    "@portavate/shared": "workspace:*"
+  }
+}

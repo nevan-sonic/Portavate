@@ -1,0 +1,14 @@
+{
+  "name": "@portavate/arkiv",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "@portavate/shared": "workspace:*",
+    "@portavate/memory-core": "workspace:*",
+    "zod": "^4.0.0"
+  }
+}
