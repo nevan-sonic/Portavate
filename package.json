@@ -26,6 +26,7 @@
     "@portavate/crypto": "workspace:*",
     "@portavate/verification": "workspace:*",
     "@portavate/api": "workspace:*",
-    "@portavate/verifier": "workspace:*"
+    "@portavate/verifier": "workspace:*",
+    "@portavate/zero-g": "workspace:*"
   }
 }

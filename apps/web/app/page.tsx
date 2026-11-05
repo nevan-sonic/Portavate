@@ -4,7 +4,7 @@ import type { ApplicationStatus } from "@portavate/shared";
 import { readServerConfig } from "@portavate/shared/config";
 
 const services = {
-  zeroG: ["0G Private Computer", "Memory extraction and evaluation"],
+  zeroG: ["0G Private Computer", "Source-grounded memory extraction"],
   arkiv: ["Arkiv", "Current memory version discovery"],
   hederaX402: ["Hedera x402", "Autonomous verification payments"],
   receivingAgent: ["Receiving agent", "Actual responses to continuity checks"],
@@ -15,7 +15,7 @@ const stateLabels = {
   not_implemented: "Not implemented",
   not_configured: "Not configured",
   configured_unverified: "Configured · unverified",
-  verified_live: "Verified live",
+  verified_live: "Live inference tested",
   unavailable: "Unavailable",
 } as const;
 
@@ -65,12 +65,12 @@ export default async function Dashboard() {
       <div className="grid gap-4 sm:grid-cols-2">
         <section className="rounded-2xl border border-line bg-panel p-6">
           <h2 className="font-semibold">Available now</h2>
-          <p className="mt-2 text-sm leading-6 text-muted">Explore the workspace and check the integration states reported by the API.</p>
+          <p className="mt-2 text-sm leading-6 text-muted">Import authorized source material and review grounded draft claims in the local workspace.</p>
         </section>
         <section className="rounded-2xl border border-line bg-panel p-6">
           <h2 className="font-semibold">Next milestone</h2>
           <p className="mt-2 text-sm leading-6 text-muted">The first live slice starts with an approved import and one receiving model.</p>
-          <Link href="/import" className="mt-3 inline-block text-sm font-semibold text-accent underline underline-offset-4">View import scope</Link>
+          <Link href="/import" className="mt-3 inline-block text-sm font-semibold text-accent underline underline-offset-4">Open Import Memory</Link>
         </section>
       </div>
     </div>

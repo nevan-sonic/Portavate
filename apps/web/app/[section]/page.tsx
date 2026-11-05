@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import { benchmarkConditions } from "@portavate/benchmark";
 
 const sections = {
-  import: ["Import Memory", "Import is pending", "A future release will accept approved text, Markdown, or a defined JSON format and let you review claims against their sources."],
-  library: ["Memory Library", "No published versions", "Approved packages and their version history will appear here after registry publishing and private storage are available."],
+  library: ["Memory Library", "No published versions", "Open saved drafts from Import Memory. Published versions will appear here after registry publishing and private storage are available."],
   handoffs: ["Handoffs", "No handoffs recorded", "Handoffs will show recipient access, payment settlement, continuity checks, and any issued passport."],
   benchmark: ["Benchmark Lab", "No benchmark runs", "The planned comparison uses the same tasks and receiving model across three context conditions."],
   settings: ["Settings", "Account settings are pending", "Recipient permissions, approved merchants, and agent spending limits will appear here once account and authorization workflows are available."],

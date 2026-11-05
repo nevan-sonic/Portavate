@@ -29,6 +29,9 @@ importers:
       '@portavate/verifier':
         specifier: workspace:*
         version: link:apps/verifier
+      '@portavate/zero-g':
+        specifier: workspace:*
+        version: link:packages/zero-g
       '@types/node':
         specifier: ^24.0.0
         version: 24.19.2
@@ -50,12 +53,21 @@ importers:
       '@fastify/cors':
         specifier: ^11.0.0
         version: 11.4.0
+      '@portavate/memory-core':
+        specifier: workspace:*
+        version: link:../../packages/memory-core
       '@portavate/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@portavate/zero-g':
+        specifier: workspace:*
+        version: link:../../packages/zero-g
       fastify:
         specifier: ^5.7.0
         version: 5.12.8
+      zod:
+        specifier: ^4.0.0
+        version: 4.6.7
 
   apps/verifier:
     dependencies:
@@ -71,6 +83,9 @@ importers:
       '@portavate/benchmark':
         specifier: workspace:*
         version: link:../../packages/benchmark
+      '@portavate/memory-core':
+        specifier: workspace:*
+        version: link:../../packages/memory-core
       '@portavate/shared':
         specifier: workspace:*
         version: link:../../packages/shared

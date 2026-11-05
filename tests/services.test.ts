@@ -24,7 +24,7 @@ describe("API", () => {
     expect(response.statusCode).toBe(200);
     const status = applicationStatusSchema.parse(response.json());
     expect(status.readiness).toBe("foundation");
-    expect(Object.values(status.integrations)).toEqual(Array(5).fill("not_implemented"));
+    expect(Object.values(status.integrations)).toEqual(["configured_unverified", ...Array(4).fill("not_implemented")]);
     expect(response.body).not.toMatch(/fixture|private-key/i);
   });
 

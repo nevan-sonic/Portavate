@@ -31,3 +31,20 @@ The workspace runs locally on Node.js LTS and pnpm. The Next.js dashboard reads 
 All sponsor and recipient adapters report `not_implemented`. There is no production validation reader or passport issuer. Format validation of signatures and commitments does not authenticate them. PostgreSQL, encrypted storage, authentication, memory import, benchmark execution and deployment are pending.
 
 The next milestone is the first approved import and receiving-model vertical slice. Use [the architecture decisions](architecture-decisions.md) for the trust boundaries and [sponsor requirements](sponsor-requirements.md) for live evidence and qualification.
+
+## Step 2 · Local 0G memory import
+
+Import Memory accepts pasted text and UTF-8 text, Markdown, or conversation JSON. It saves the source, submits numbered passages to the 0G Router, validates versioned JSON, and checks quoted evidence before saving an owner-only draft. Review supports filtering, inspecting passages, editing, approval, rejection, sensitivity, visibility, and an approved-package preview.
+
+The local API uses a bearer token and SQLite migration 1. Sources and review decisions survive process restart. The database is plaintext and intended for a single trusted machine. See [the 0G integration guide](zero-g-integration.md) for configuration, endpoints and retention.
+
+### Validation
+
+- Frozen dependency installation, strict type checking, lint, 37 automated tests and the production build passed.
+- Automated provider tests use synthetic responses for metadata, billing and authorization errors, retry and timeout handling, output validation and private routing. The persistence test reopens a real SQLite file.
+
+- A production browser smoke test used an explicitly synthetic 0G transport. It passed Markdown upload, extraction, metadata display, filtering, evidence inspection, edit and approval, reload, rejection, dashboard status, and Step 1 route checks.
+
+### Live sponsor status
+
+**0G live inference verification · BLOCKED.** No funded Router API key was configured during implementation. No real request ID, usage, or attestation result was recorded. The integration remains unverified until a genuine extraction passes schema and source checks. Arkiv, Hedera, receiving-agent evaluation and passport issuance remain pending. The next validation milestone is a funded 0G smoke run using the documented non-sensitive sample.

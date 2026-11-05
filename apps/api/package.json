@@ -11,6 +11,9 @@
   "dependencies": {
     "fastify": "^5.7.0",
     "@portavate/shared": "workspace:*",
-    "@fastify/cors": "^11.0.0"
+    "@fastify/cors": "^11.0.0",
+    "@portavate/memory-core": "workspace:*",
+    "@portavate/zero-g": "workspace:*",
+    "zod": "^4.0.0"
   }
 }

@@ -4,7 +4,7 @@
 
 Portavate is a design for transferring task-relevant memory between AI assistants and checking whether the receiving agent can use it. The planned **Continuity Passport** is a signed report that binds the outcome of specific checks to a memory version, a recipient, and a settled verification payment.
 
-> **Project status · Step 1 foundation.** The local web workspace, status API, standalone verifier shell, shared contracts, and passport eligibility guard are available. Memory workflows, live integrations, passport issuance, benchmark execution, and public deployment are pending.
+> **Project status · Step 2 local alpha.** Import Memory can submit authorized source text to 0G, ground extracted claims in source passages, and persist draft reviews in local SQLite. Live sponsor inference verification is blocked pending a funded API key. Version publishing, paid verification, receiving-agent evaluation, and passport issuance are pending.
 
 [Workflow](#verified-handoff) · [Architecture](#architecture) · [Getting started](#getting-started) · [ETHGlobal Mumbai](#ethglobal-mumbai-2026)
 
@@ -140,7 +140,7 @@ Freeze scored checks and pass thresholds before running the comparison. Keep a h
 
 ## Getting started
 
-Use Node.js 24 or 26 LTS and pnpm 11.25.0. Step 1 runs locally without credentials, PostgreSQL, or object storage.
+Use Node.js 24 or 26 LTS and pnpm 11.25.0. The workspace shell starts without credentials. To enable Step 2 memory routes, configure a local alpha token and a funded 0G Router API key. SQLite initializes on the first authorized memory request.
 
 ~~~sh
 git clone https://github.com/nevan-sonic/Portavate.git
@@ -155,7 +155,7 @@ pnpm dev
 | API | http://127.0.0.1:4000 | GET /health and GET /api/status |
 | Verifier | http://127.0.0.1:4001 | GET /health and a POST /api/verify placeholder returning HTTP 501 |
 
-The dashboard fetches status on the server. Copy [the example configuration](.env.example) to a root .env file if you need to override defaults. API_URL is server-side. WEB_ORIGIN can explicitly allow a browser origin on the API. Production cross-origin access defaults to disabled. Leave future integration settings blank for Step 1.
+The dashboard fetches status on the server. Copy [the example configuration](.env.example) to a root .env file if you need to override defaults. API_URL is server-side. WEB_ORIGIN can explicitly allow a browser origin on the API. Production cross-origin access defaults to disabled. Leave future integration settings blank. Follow the [0G integration guide](docs/zero-g-integration.md) for key and token setup, accepted source formats, database retention and live test instructions. Step 2 is a single-user, loopback-only alpha.
 
 ~~~sh
 pnpm typecheck

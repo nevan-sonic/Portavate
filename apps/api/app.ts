@@ -1,11 +1,13 @@
 import Fastify from "fastify";
+import { registerMemoryRoutes } from "./memory-routes.ts";
+import type { ExtractWithZeroG } from "@portavate/zero-g/client";
 import cors from "@fastify/cors";
 import type { ApplicationStatus } from "@portavate/shared";
 import { readServerConfig } from "@portavate/shared/config";
 
 import metadata from "./package.json" with { type: "json" };
 
-export function createApi(env: NodeJS.ProcessEnv = process.env) {
+export function createApi(env: NodeJS.ProcessEnv = process.env, extract?: ExtractWithZeroG) {
   const app = Fastify();
   const config = readServerConfig(env);
   if (config.WEB_ORIGIN) app.register(cors, { origin: [config.WEB_ORIGIN], methods: ["GET"] });
@@ -19,10 +21,11 @@ export function createApi(env: NodeJS.ProcessEnv = process.env) {
     version: metadata.version,
     timestamp: new Date().toISOString(),
   }));
+  const zeroGStatus = registerMemoryRoutes(app, env, ["127.0.0.1", "::1"].includes(config.PORTAVATE_HOST), extract);
   app.get("/api/status", async (): Promise<ApplicationStatus> => ({
     readiness: "foundation",
     integrations: {
-      zeroG: "not_implemented",
+      zeroG: zeroGStatus(),
       arkiv: "not_implemented",
       hederaX402: "not_implemented",
       receivingAgent: "not_implemented",
